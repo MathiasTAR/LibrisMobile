@@ -21,47 +21,65 @@ Aplicativo mobile para gerenciamento de empréstimos de livros em bibliotecas ac
 ---
 
 ## 🚀 Funcionalidades
-z
-📌 Módulos já implementados:
 
-* 📖 Listagem de Empréstimos Ativos e Atrasados
-* 📅 Verificação automática de status (ativo/atrasado) com base nas datas
-* 👤 Informações do Usuário (nome, matrícula, telefone etc.)
-* 🔍 Barra de pesquisa para facilitar navegação
-* 💡 Cards com UI moderna e bordas coloridas por status
+- 📖 Listagem de Empréstimos Ativos e Atrasados
+- 📅 Verificação automática de status (ativo/atrasado)
+- 👤 Visualização de informações do usuário (nome, matrícula, telefone etc.)
+- 🔍 Barra de pesquisa para facilitar a navegação
+- 💡 Cards com UI moderna e bordas coloridas por status
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## 🛠 Tecnologias
 
-* ⚛️ React Native
-* 📦 Expo
-* 💅 Styled Components / StyleSheet
-* 🧮 TypeScript
-* 📚 React Navigation
-* 🎨 @expo/vector-icons + Phosphor Icons
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [Styled Components](https://styled-components.com/) / StyleSheet
+- [TypeScript](https://www.typescriptlang.org/)
+- [React Navigation](https://reactnavigation.org/)
+- [@expo/vector-icons](https://icons.expo.fyi/) + [Phosphor Icons](https://phosphoricons.com/)
 
 ---
 
 ## 📌 Próximos Passos
 
-* [ ] ⚙️ Adicionar configurações (modo escuro, desativar notificações)
-* [ ] 🔐 Implementar autenticação de usuários (login)
-* [ ] 🔄 Conectar com backend (Node.js + MySQL)
-* [ ] 🔔 Adicionar notificações para devoluções pendentes
-* [ ] 🎨 Melhorar responsividade para diferentes tamanhos de tela
+- [ ] ⚙️ Adicionar configurações (modo escuro, notificações)
+- [ ] 🔐 Implementar autenticação de usuários
+- [ ] 🔄 Conectar com backend (Node.js + MySQL)
+- [ ] 🔔 Notificações para devoluções pendentes
+- [ ] 🎨 Melhorar responsividade para diferentes tamanhos de tela
 
 ---
 
-## 🔧 Instalação e Execução
+🤝 Como Contribuir
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (git checkout -b feature/nova-feature)
+3. Commit suas alterações (git commit -m 'feat: nova feature')
+4. Faça push da branch (git push origin feature/nova-feature)
+5. Abra um Pull Request
+
+---
+
+## 🔧 Instalação
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+
+### Passos para rodar localmente
 
 ```bash
 # Clone o repositório:
-git clone https://github.com/MathiasTAR/Libris-Mobile.git
+git clone https://github.com/MathiasTAR/LibrisMobile.git
+
+# Acesse a pasta do projeto:
+cd LibrisMobile
 
 # Instale as dependências:
-cd nome-do-repo
 npm install
 
-# Execute com Expo/npm:
+# Rode o App
 npx expo start / npm start
