@@ -16,7 +16,7 @@ Aplicativo mobile para gerenciamento de empréstimos de livros em bibliotecas ac
 
 | Tela de Login                                             | Tela de Empréstimos Ativos                                | Tela de Perfil do Usuário                                  |
 | --------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------- |
-| ![ativo](https://via.placeholder.com/200x400?text=Ativos) | ![ativo](https://via.placeholder.com/200x400?text=Ativos) | ![perfil](https://via.placeholder.com/200x400?text=Perfil) |
+| <img src="/assets/images/login" width="200"> | ![ativo](https://via.placeholder.com/200x400?text=Ativos) | ![perfil](https://via.placeholder.com/200x400?text=Perfil) |
 
 ---
 
