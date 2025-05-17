@@ -14,9 +14,9 @@ Aplicativo mobile para gerenciamento de empréstimos de livros em bibliotecas ac
 
 ## ✨ Demonstração
 
-| Tela de Login                                             | Tela de Status dos Livros                              | Tela de Perfil do Usuário                                  |
-| --------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------- |
-| <img src="/assets/images/telalogin" width="200"> | <img src="/assets/images/menubiblioteca" width="200"> | <img src="/assets/images/menuusuario" width="200"> |
+| Tela de Login                                             | Tela de Status dos Livros                              | Tela de Perfil do Usuário                                  | Tela de Configurações
+| --------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| <img src="/assets/images/telalogin" width="200"> | <img src="/assets/images/menubiblioteca" width="200"> | <img src="/assets/images/menuusuario" width="200"> | # Em Desenvolvimento
 
 ---
 
@@ -45,7 +45,7 @@ Aplicativo mobile para gerenciamento de empréstimos de livros em bibliotecas ac
 
 ## 📌 Próximos Passos
 
-* [ ] ⚙️ Adicionar configutrações (modo escuro, desativar notificações)
+* [ ] ⚙️ Adicionar configurações (modo escuro, desativar notificações)
 * [ ] 🔐 Implementar autenticação de usuários (login)
 * [ ] 🔄 Conectar com backend (Node.js + MySQL)
 * [ ] 🔔 Adicionar notificações para devoluções pendentes
