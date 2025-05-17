@@ -16,7 +16,7 @@ Aplicativo mobile para gerenciamento de empréstimos de livros em bibliotecas ac
 
 | Tela de Login                                             | Tela de Status dos Livros                              | Tela de Perfil do Usuário                                  |
 | --------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------- |
-| <img src="/assets/images/telalogin" width="200"> | <img src="/assets/images/telabiblioteca" width="200"> | <img src="/assets/images/telausuario" width="200"> |
+| <img src="/assets/images/telalogin" width="200"> | <img src="/assets/images/menubiblioteca" width="200"> | <img src="/assets/images/menuusuario" width="200"> |
 
 ---
 
