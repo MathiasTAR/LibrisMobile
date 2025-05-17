@@ -67,7 +67,9 @@ Aplicativo mobile para gerenciamento de empréstimos de livros em bibliotecas ac
 
 - [Node.js](https://nodejs.org/)
 - [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
-- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)  
+
+- Recomenda-se instalar o app Expo Go no [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) ou [iOS](https://apps.apple.com/app/expo-go/id982107779)
 
 ### Passos para rodar localmente
 
@@ -80,6 +82,7 @@ cd LibrisMobile
 
 # Instale as dependências:
 npm install
+npm install -g expo-cli
 
 # Rode o App
 npx expo start / npm start
