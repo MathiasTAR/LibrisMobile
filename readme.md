@@ -3,10 +3,10 @@
 Aplicativo mobile para gerenciamento de empréstimos de livros em bibliotecas acadêmicas. Desenvolvido com React Native e Expo.
 
 <div align="center">
-  <img src="libris\assets\images\libris2.png" width="200" alt="Logo Libris">
+  <img src="/assets/images/libris2.png" width="200" alt="Logo Libris">
 
-![GitHub last commit](https://img.shields.io/github/last-commit/MathiasTAR/Libris-Mobile)
-![GitHub repo size](https://img.shields.io/github/repo-size/MathiasTAR/Libris-Mobile)
+![GitHub last commit](https://img.shields.io/github/last-commit/MathiasTAR/LibrisMobile)
+![GitHub repo size](https://img.shields.io/github/repo-size/MathiasTAR/LibrisMobile)
 
 </div>
 
@@ -14,53 +14,75 @@ Aplicativo mobile para gerenciamento de empréstimos de livros em bibliotecas ac
 
 ## ✨ Demonstração
 
-| Tela de Login                                             | Tela de Empréstimos Ativos                                | Tela de Perfil do Usuário                                  |
-| --------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------- |
-| ![ativo](https://via.placeholder.com/200x400?text=Ativos) | ![ativo](https://via.placeholder.com/200x400?text=Ativos) | ![perfil](https://via.placeholder.com/200x400?text=Perfil) |
+| Tela de Login                                             | Tela de Status dos Livros                              | Tela de Perfil do Usuário                                  | Tela de Configurações
+| --------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------- | ----------------------------------------- |
+| <img src="/assets/images/telalogin" width="200"> | <img src="/assets/images/menubiblioteca" width="200"> | <img src="/assets/images/menuusuario" width="200"> | Em Desenvolvimento
 
 ---
 
 ## 🚀 Funcionalidades
 
-📌 Módulos já implementados:
-
-* 📖 Listagem de Empréstimos Ativos e Atrasados
-* 📅 Verificação automática de status (ativo/atrasado) com base nas datas
-* 👤 Informações do Usuário (nome, matrícula, telefone etc.)
-* 🔍 Barra de pesquisa para facilitar navegação
-* 💡 Cards com UI moderna e bordas coloridas por status
+- 📖 Listagem de Empréstimos Ativos e Atrasados
+- 📅 Verificação automática de status (ativo/atrasado)
+- 👤 Visualização de informações do usuário (nome, matrícula, telefone etc.)
+- 🔍 Barra de pesquisa para facilitar a navegação
+- 💡 Cards com UI moderna e bordas coloridas por status
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## 🛠 Tecnologias
 
-* ⚛️ React Native
-* 📦 Expo
-* 💅 Styled Components / StyleSheet
-* 🧮 TypeScript
-* 📚 React Navigation
-* 🎨 @expo/vector-icons + Phosphor Icons
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [Styled Components](https://styled-components.com/) / StyleSheet
+- [TypeScript](https://www.typescriptlang.org/)
+- [React Navigation](https://reactnavigation.org/)
+- [@expo/vector-icons](https://icons.expo.fyi/) + [Phosphor Icons](https://phosphoricons.com/)
 
 ---
 
 ## 📌 Próximos Passos
 
-* [ ] 🔐 Implementar autenticação de usuários (login)
-* [ ] 🔄 Conectar com backend (Node.js + MySQL)
-* [ ] 🔔 Adicionar notificações para devoluções pendentes
-* [ ] 🎨 Melhorar responsividade para diferentes tamanhos de tela
+- [ ] ⚙️ Adicionar configurações (modo escuro, notificações)
+- [ ] 🔐 Implementar autenticação de usuários
+- [ ] 🔄 Conectar com backend (Node.js + MySQL)
+- [ ] 🔔 Notificações para devoluções pendentes
+- [ ] 🎨 Melhorar responsividade para diferentes tamanhos de tela
 
 ---
 
-## 🔧 Instalação e Execução
+🤝 Como Contribuir
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (git checkout -b feature/nova-feature)
+3. Commit suas alterações (git commit -m 'feat: nova feature')
+4. Faça push da branch (git push origin feature/nova-feature)
+5. Abra um Pull Request
+
+---
+
+## 🔧 Instalação
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)  
+
+- Recomenda-se instalar o app Expo Go no [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) ou [iOS](https://apps.apple.com/app/expo-go/id982107779)
+
+### Passos para rodar localmente
 
 ```bash
 # Clone o repositório:
-git clone https://github.com/MathiasTAR/Libris-Mobile.git
+git clone https://github.com/MathiasTAR/LibrisMobile.git
+
+# Acesse a pasta do projeto:
+cd LibrisMobile
 
 # Instale as dependências:
-cd nome-do-repo
 npm install
+npm install -g expo-cli
 
-# Execute com Expo/npm:
+# Rode o App
 npx expo start / npm start
