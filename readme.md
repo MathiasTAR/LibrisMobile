@@ -45,7 +45,7 @@ Aplicativo mobile para gerenciamento de empréstimos de livros em bibliotecas ac
 
 - [ ] ⚙️ Adicionar configurações (modo escuro, notificações)
 - [ ] 🔐 Implementar autenticação de usuários
-- [ ] 🔄 Conectar com backend (Node.js + MySQL)
+- [x] 🔄 Conectar com backend (Node.js + MySQL)
 - [ ] 🔔 Notificações para devoluções pendentes
 - [ ] 🎨 Melhorar responsividade para diferentes tamanhos de tela
 
