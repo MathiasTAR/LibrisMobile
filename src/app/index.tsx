@@ -1,49 +1,70 @@
-import { View, StyleSheet, Alert, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Alert, Image, ImageBackground, StatusBar, Platform } from "react-native";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@components/button";
 import { Input } from "@components/input";
 
+import { fetchLogin } from '../services/api';
+
+interface Login {
+  matricula: string;
+  senha: string;
+}
+
 export default function Index() {
+
   const [matricula, setMatricula] = useState("");
   const [senha, setSenha] = useState("");
 
-  async function handleNext() {
-    if (!matricula || !senha) {
-      Alert.alert("Erro", "Preencha todos os campos");
-      return;
+  const handleLogin = async () => {
+    try {
+      const result = await fetchLogin(matricula, senha);
+      Alert.alert('Login realizado', `Bem-vindo, ${result.usuario.nome}`);
+      router.navigate('../Menu'); // redireciona para o Menu principal
+    } catch (error: any) {
+      Alert.alert('Erro', error.message);
     }
-      router.navigate("../menu")
-  }
+  };
+
+  // Safe way to get status bar height
+  const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight ?? 0 : 0;
 
   return (
-    <ImageBackground
-      source={require("@assets/images/background.jpg")}
-      style={styles.background}
-      resizeMode="cover"
-    >
-      <View style={styles.container}>
-        <View style={styles.card}>
-          <Image
-            source={require("@assets/images/libris2.png")}
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <Input
-            onChangeText={setMatricula}
-            value={matricula}
-            placeholder="Digite seu login"
-          />
-          <Input
-            onChangeText={setSenha}
-            value={senha}
-            placeholder="Digite sua senha"
-            secureTextEntry={true}
-          />
-          <Button title="Entrar" onPress={handleNext} />
+    <>
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="light-content"
+      />
+      
+      <ImageBackground
+        source={require("@assets/images/background.jpg")}
+        style={[styles.background, { marginTop: -statusBarHeight }]}
+        resizeMode="cover"
+      >
+        <View style={[styles.container, { paddingTop: statusBarHeight }]}>
+          <View style={styles.card}>
+            <Image
+              source={require("@assets/images/libris2.png")}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+            <Input
+              onChangeText={setMatricula}
+              value={matricula}
+              placeholder="Digite seu login"
+            />
+            <Input
+              onChangeText={setSenha}
+              value={senha}
+              placeholder="Digite sua senha"
+              secureTextEntry={true}
+            />
+            <Button title="Entrar" onPress={handleLogin} />
+          </View>
         </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </>
   );
 }
 
@@ -55,7 +76,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  background: { flex: 1 },
+  background: { 
+    flex: 1,
+  },
   card: {
     backgroundColor: "rgb(248, 244, 240)",
     padding: 32,

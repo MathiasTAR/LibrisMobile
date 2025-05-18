@@ -12,5 +12,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "../index.tsx", "src/app/index.tsx"  ]
+, "../index.tsx", "src/app/index.tsx", "backend/index.js"  ]
 }

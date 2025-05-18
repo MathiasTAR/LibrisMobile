@@ -10,13 +10,7 @@ interface LoanCardProps {
   fineAmount?: string;
 }
 
-export const LoanCard: React.FC<LoanCardProps> = ({
-  status,
-  bookTitle,
-  loanDate,
-  returnDate,
-  fineAmount,
-}) => {
+export const LoanCard: React.FC<LoanCardProps> = ({status, bookTitle, loanDate, returnDate, fineAmount,}) => {
   const isLate = status === 'atrasado';
   const statusColor = isLate ? '#dc2626' : '#0fc03b';
   const statusTitle = isLate ? 'Empréstimo atrasado' : 'Empréstimo ativo';

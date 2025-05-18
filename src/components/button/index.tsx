@@ -10,9 +10,10 @@ export function Button({ title, ...rest }: Props) {
         <TouchableOpacity 
             activeOpacity={0.6} 
             style={styles.button}
-            {...rest}
+            {...rest} 
         >
             <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
     );
 }
+

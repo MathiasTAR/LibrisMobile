@@ -4,20 +4,17 @@ export const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderColor: '#f4a261',
-    borderWidth: 1,
-    borderRadius: 12,
+    borderLeftWidth: 4, 
+    borderRadius: 8,
     padding: 12,
     marginVertical: 8,
-    marginHorizontal: 16,
-    // sombra
+    marginHorizontal: 20,
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
-    elevation: 3,
+    elevation: 2,
   },
-
-  // cabeçalho: ícone + título
   headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -32,8 +29,6 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
-
-  // rodapé: status + ID
   footerRow: {
     flexDirection: 'row',
     alignItems: 'center',
