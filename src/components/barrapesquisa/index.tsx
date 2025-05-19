@@ -14,7 +14,7 @@ export const SearchBar = ({ value, onChangeText, onSearch }: SearchBarProps) => 
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Enter text..."
+        placeholder="Escreva aqui..."
         value={value}
         onChangeText={onChangeText}
         placeholderTextColor="#999"

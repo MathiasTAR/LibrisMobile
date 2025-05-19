@@ -20,10 +20,10 @@ export default function Index() {
       
       if (result.sucesso) {
         router.navigate("../menu");
-      } else {
+      }else{
         Alert.alert("Erro", result.mensagem || "Credenciais inválidas");
       }
-    } catch (error: any) {
+    }catch (error: any) {
       Alert.alert("Erro", error.message || "Falha na conexão");
     }
   }
