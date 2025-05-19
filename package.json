@@ -30,7 +30,7 @@
     "expo-system-ui": "~5.0.7",
     "expo-web-browser": "~14.1.6",
     "express": "^5.1.0",
-    "mysql": "^2.18.1",
+    "mysql2": "^3.14.1",
     "nativewind": "^4.1.23",
     "phosphor-react": "^1.4.1",
     "phosphor-react-native": "^2.3.1",

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { fetchLivros } from '../../services/api';
+import { listarLivros } from '../../services/api';
 import { BookCard } from '@components/cards/cardlivros';
 import {SearchBar} from '@components/barrapesquisa';
 import {Card} from '@components/cards/topcard';
@@ -20,7 +20,7 @@ export default function biblioteca() {
 
   useEffect(() => {
     const carregarLivros = async () => {
-      const data = await fetchLivros();
+      const data = await listarLivros();
       setLivros(data);
       setTodosLivros(data);
     };
@@ -40,7 +40,7 @@ export default function biblioteca() {
       <SearchBar value={query} onChangeText={setQuery} onSearch={handleSearch} />
       <ScrollView style={styles.scroll} contentContainerStyle={styles.containerScroll}>
         {livros.map((livro) => (
-          <BookCard title={livro.titulo} autor={livro.autor} status={livro.disponibilidade} id={livro.id_livro} />
+          <BookCard key={livro.id} title={livro.titulo} autor={livro.autor} status={livro.disponibilidade} id={livro.id_livro} />
         ))}
       </ScrollView>
     </View>

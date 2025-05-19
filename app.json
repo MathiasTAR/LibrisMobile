@@ -17,6 +17,7 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"],
       "adaptiveIcon": {
         "foregroundImage": "@/../assets/images/spash-icon.png",
         "backgroundColor": "#ffffff"

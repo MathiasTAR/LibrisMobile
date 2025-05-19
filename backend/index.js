@@ -21,18 +21,26 @@ app.get('/livros', (req, res) => {
   });
 });
 
-// Rota de login
+// Login - Versão corrigida
 app.post('/login', (req, res) => {
   const { matricula, senha } = req.body;
 
-  const sql = 'SELECT * FROM usuarios WHERE matricula = ? AND senha = ?';
-  db.query(sql, [matricula, senha], (err, results) => {
-    if (err) return res.status(500).json({ erro: err });
+  if (!matricula || !senha) {
+    return res.status(400).json({ sucesso: false, mensagem: 'Matrícula e senha são obrigatórias' });
+  }
+
+  const query = 'SELECT * FROM usuarios WHERE matricula = ? AND senha = ?';
+  db.query(query, [matricula, senha], (err, results) => {
+    if (err) {
+      console.error('Erro no login:', err);
+      return res.status(500).json({ sucesso: false, mensagem: 'Erro no servidor' });
+    }
 
     if (results.length > 0) {
-      res.json({ sucesso: true, usuario: results[0] });
+      const usuario = results[0];
+      res.json({ sucesso: true, usuario });
     } else {
-      res.status(401).json({ sucesso: false, mensagem: 'Matrícula ou senha inválida' });
+      res.status(401).json({ sucesso: false, mensagem: 'Credenciais inválidas' });
     }
   });
 });

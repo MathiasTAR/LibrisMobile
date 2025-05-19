@@ -1,32 +1,33 @@
 import { View, StyleSheet, Alert, Image, ImageBackground, StatusBar, Platform } from "react-native";
 import { router } from "expo-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@components/button";
 import { Input } from "@components/input";
-
-import { fetchLogin } from '../services/api';
-
-interface Login {
-  matricula: string;
-  senha: string;
-}
+import { loginUsuario } from "../services/api"; // Importar a função de login
 
 export default function Index() {
-
   const [matricula, setMatricula] = useState("");
   const [senha, setSenha] = useState("");
 
-  const handleLogin = async () => {
-    try {
-      const result = await fetchLogin(matricula, senha);
-      Alert.alert('Login realizado', `Bem-vindo, ${result.usuario.nome}`);
-      router.navigate('../Menu'); // redireciona para o Menu principal
-    } catch (error: any) {
-      Alert.alert('Erro', error.message);
+  async function handleNext() {
+    if (!matricula || !senha) {
+      Alert.alert("Erro", "Preencha todos os campos");
+      return;
     }
-  };
 
-  // Safe way to get status bar height
+    try {
+      const result = await loginUsuario(matricula, senha);
+      
+      if (result.sucesso) {
+        router.navigate("../menu");
+      } else {
+        Alert.alert("Erro", result.mensagem || "Credenciais inválidas");
+      }
+    } catch (error: any) {
+      Alert.alert("Erro", error.message || "Falha na conexão");
+    }
+  }
+
   const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight ?? 0 : 0;
 
   return (
@@ -52,7 +53,8 @@ export default function Index() {
             <Input
               onChangeText={setMatricula}
               value={matricula}
-              placeholder="Digite seu login"
+              placeholder="Digite sua matrícula"
+              keyboardType="numeric" // Adicionado teclado numérico
             />
             <Input
               onChangeText={setSenha}
@@ -60,13 +62,17 @@ export default function Index() {
               placeholder="Digite sua senha"
               secureTextEntry={true}
             />
-            <Button title="Entrar" onPress={handleLogin} />
+            <Button 
+              title="Entrar" 
+              onPress={handleNext}
+            />
           </View>
         </View>
       </ImageBackground>
     </>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
