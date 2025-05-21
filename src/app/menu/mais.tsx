@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Switch,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import {View, Text, StyleSheet, Switch, TouchableOpacity, Alert,} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
 import { Card } from '@components/cards/topcard';
+import { Feather } from '@expo/vector-icons';
 
-export default function Configuracoes() {
+export default function Mais() {
   const navigation = useNavigation<any>();
   const [temaEscuro, setTemaEscuro] = useState(false);
   const [notificacoes, setNotificacoes] = useState(true);
@@ -34,37 +27,30 @@ export default function Configuracoes() {
     ]);
   };
 
-  const alternarTema = () => {
-    setTemaEscuro((prev) => !prev);
-    // Aqui você pode salvar em AsyncStorage ou context, se quiser usar globalmente
-  };
-
-  const alternarNotificacoes = () => {
-    setNotificacoes((prev) => !prev);
-    // Pode salvar isso se quiser aplicar logicamente
-  };
-
   return (
     <View style={styles.container}>
-      <Card></Card>
-      <Text style={styles.titulo}>Configurações</Text>
+      <Card />
 
-      <View style={styles.switchRow}>
-        <Feather name="moon" size={20} color="#3F3F46" />
-        <Text style={styles.switchLabel}>Tema Escuro</Text>
-        <Switch value={temaEscuro} onValueChange={alternarTema} />
+      <View style={styles.content}>
+        <Text style={styles.sectionTitle}>Configurações</Text>
+
+        <View style={styles.settingItem}>
+          <Feather name="moon" size={20} color="#3F3F46" />
+          <Text style={styles.settingLabel}>Tema Escuro</Text>
+          <Switch value={temaEscuro} onValueChange={() => setTemaEscuro(prev => !prev)} />
+        </View>
+
+        <View style={styles.settingItem}>
+          <Feather name="bell" size={20} color="#3F3F46" />
+          <Text style={styles.settingLabel}>Notificações</Text>
+          <Switch value={notificacoes} onValueChange={() => setNotificacoes(prev => !prev)} />
+        </View>
+
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <Feather name="log-out" size={16} color="#fff" />
+          <Text style={styles.logoutText}>Sair da Conta</Text>
+        </TouchableOpacity>
       </View>
-
-      <View style={styles.switchRow}>
-        <Feather name="bell" size={20} color="#3F3F46" />
-        <Text style={styles.switchLabel}>Notificações</Text>
-        <Switch value={notificacoes} onValueChange={alternarNotificacoes} />
-      </View>
-
-      <TouchableOpacity style={styles.botaoSair} onPress={handleLogout}>
-        <Feather name="log-out" size={16} color="#fff" />
-        <Text style={styles.botaoSairTexto}>Sair da Conta</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -72,28 +58,31 @@ export default function Configuracoes() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
     backgroundColor: '#FAFAFA',
   },
-  titulo: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 32,
-    color: '#3F3F46',
+  content: {
+    paddingHorizontal: 16,
+    paddingTop: 24,
   },
-  switchRow: {
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#3F3F46',
+    marginBottom: 24,
+  },
+  settingItem: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 24,
     justifyContent: 'space-between',
   },
-  switchLabel: {
+  settingLabel: {
     flex: 1,
     marginLeft: 12,
     fontSize: 16,
     color: '#3F3F46',
   },
-  botaoSair: {
+  logoutButton: {
     backgroundColor: '#EF4444',
     padding: 12,
     borderRadius: 8,
@@ -101,8 +90,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
     marginTop: 32,
+    justifyContent: 'center',
   },
-  botaoSairTexto: {
+  logoutText: {
     color: '#fff',
     fontWeight: 'bold',
   },
