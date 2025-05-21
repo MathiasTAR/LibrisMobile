@@ -15,7 +15,7 @@ const db = mysql.createConnection({
 
 // Rota para buscar livros
 app.get('/livros', (req, res) => {
-  db.query('SELECT id_livro, autor, disponibilidade, titulo FROM livros', (err, results) => {
+  db.query('SELECT id_livro, autor, disponibilidade, id_categoria, titulo FROM livros', (err, results) => {
     if (err) return res.status(500).json({ erro: err });
     res.json(results);
   });

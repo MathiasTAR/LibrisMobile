@@ -17,7 +17,7 @@ interface Emprestimo {
   bookTitle: string;
   loanDate: string;
   returnDate: string;
-  fineAmount?: string | null;
+  fineAmount?: string;
   status?: 'ativo' | 'atrasado';
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
 import { Book } from 'phosphor-react-native';
@@ -15,7 +15,14 @@ export const BookCard = ({ title, status, id, autor }: BookCardProps) => {
   const navigation = useNavigation<any>();
 
   const handlePress = () => {
-    navigation.navigate('Detalhes', { title, status, id });
+    Alert.alert(
+      '📚 Detalhes do Livro',
+      `Título: ${title}\nAutor: ${autor}\nStatus: ${status}\nID: ${id}`,
+      [
+        { text: 'OK', onPress: () => {} }
+      ],
+      { cancelable: true }
+    );
   };
 
   const statusStyle = status === 'Disponível' ? styles.available : styles.unavailable;
