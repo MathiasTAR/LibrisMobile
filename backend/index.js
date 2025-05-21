@@ -45,6 +45,31 @@ app.post('/login', (req, res) => {
   });
 });
 
+app.get('/emprestimos/:matricula', (req, res) => {
+  const { matricula } = req.params;
+
+  const query = `
+    SELECT
+      id AS id,
+      livro AS bookTitle,
+      DATE_FORMAT(dataEmprestimo, '%d/%m/%Y') AS loanDate,
+      DATE_FORMAT(dataEmprestimo, '%d/%m/%Y') AS returnDate,
+      IF(multa > 0, CONCAT('R$ ', FORMAT(e.multa, 2, 'pt_BR')), NULL) AS fineAmount
+    FROM emprestimos e
+    WHERE matricula = ?
+    ORDER BY dataEmprestimo DESC
+  `;
+
+  db.query(query, [matricula], (err, results) => {
+    if (err) {
+      console.error('Erro ao buscar empréstimos:', err);
+      return res.status(500).json({ erro: 'Erro ao buscar empréstimos' });
+    }
+    res.json(results);
+  });
+});
+
+
 app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000');
 });

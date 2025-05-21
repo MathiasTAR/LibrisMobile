@@ -1,111 +1,142 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { listarEmprestimosPorMatricula } from '../../services/api';
 import { Card } from '@components/cards/topcard';
 import { LoanCard } from '@components/emprestimos';
 
+interface Usuario {
+  nome: string;
+  email: string;
+  telefone: string;
+  matricula: string;
+}
+
+interface Emprestimo {
+  id: number;
+  bookTitle: string;
+  loanDate: string;
+  returnDate: string;
+  fineAmount?: string | null;
+  status?: 'ativo' | 'atrasado';
+}
+
 export default function Usuario() {
-  // Dados de exemplo - idealmente esses dados viriam de uma API ou banco de dados
-  const loans = [
-    {
-      id: 1,
-      bookTitle: "1984 de George Orwell",
-      loanDate: "16/05/2025",
-      returnDate: "30/06/2025",
-      fineAmount: null,
-    },
-    {
-      id: 2,
-      bookTitle: "Dom Casmurro de Machado de Assis",
-      loanDate: "10/05/2025",
-      returnDate: "24/06/2025",
-      fineAmount: null,
-    },
-    {
-      id: 3,
-      bookTitle: "Matemática Basica",
-      loanDate: "30/04/2025",
-      returnDate: "14/05/2025",
-      fineAmount: "R$ 53.00",
-    },
-  ];
+  const [usuario, setUsuario] = useState<Usuario | null>(null);
+  const [emprestimos, setEmprestimos] = useState<Emprestimo[]>([]);
 
-  // Função para converter string "dd/mm/yyyy" em objeto Date
-  function parseDate(dateStr: string) {
-    const [day, month, year] = dateStr.split('/');
-    return new Date(Number(year), Number(month) - 1, Number(day));
-  }
+  useEffect(() => {
+    const carregarDados = async () => {
+      try {
+        const dados = await AsyncStorage.getItem('usuarioLogado');
+        if (!dados) {
+          Alert.alert('Erro', 'Usuário não encontrado. Faça login novamente.');
+          return;
+        }
 
-  // Data atual para comparação
-  const today = new Date();
+        const usuarioSalvo: Usuario = JSON.parse(dados);
+        setUsuario(usuarioSalvo);
 
-  // Filtra empréstimos ativos e atrasados
-  const loansWithStatus = loans.map(loan => {
-    const returnDate = parseDate(loan.returnDate);
-    const isLate = today > returnDate;
-    return {
-      ...loan,
-      status: isLate ? 'atrasado' : 'ativo',
+        const dadosEmprestimos = await listarEmprestimosPorMatricula(usuarioSalvo.matricula);
+
+        const emprestimosComStatus = dadosEmprestimos.map((e: Emprestimo) => {
+          const hoje = new Date();
+          const [d, m, a] = e.returnDate.split('/');
+          const dataDevolucao = new Date(`${a}-${m}-${d}`);
+          const status = hoje > dataDevolucao ? 'atrasado' : 'ativo';
+          return { ...e, status };
+        });
+
+        setEmprestimos(emprestimosComStatus);
+      } catch (error) {
+        console.error('Erro:', error);
+        Alert.alert('Erro', 'Não foi possível carregar os dados.');
+      }
     };
-  });
+
+    carregarDados();
+  }, []);
+
+  if (!usuario) {
+    return (
+      <View style={styles.container}>
+        <Text style={{ padding: 16 }}>Carregando dados do usuário...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <Card />
 
+      {/* Informações pessoais */}
       <View style={styles.personalInfoSection}>
         <Text style={styles.sectionTitle}>Informações pessoais</Text>
-        
+
         <View style={styles.infoItem}>
           <Text style={styles.infoLabel}>nome</Text>
-          <Text style={styles.infoValue}>Ana Clara Santos Silva</Text>
+          <Text style={styles.infoValue}>{usuario.nome}</Text>
         </View>
-        
+
         <View style={styles.infoItem}>
           <Text style={styles.infoLabel}>email</Text>
-          <Text style={styles.infoValue}>ana.silva@ifma.edu.br</Text>
+          <Text style={styles.infoValue}>{usuario.email}</Text>
         </View>
-        
+
         <View style={styles.infoItem}>
           <Text style={styles.infoLabel}>telefone</Text>
-          <Text style={styles.infoValue}>(98) 987654321</Text>
+          <Text style={styles.infoValue}>{usuario.telefone}</Text>
         </View>
-        
+
         <View style={styles.infoItem}>
           <Text style={styles.infoLabel}>matrícula</Text>
-          <Text style={styles.infoValue}>2023-001</Text>
+          <Text style={styles.infoValue}>{usuario.matricula}</Text>
         </View>
       </View>
 
       <View style={styles.divider} />
 
+      {/* Empréstimos */}
       <ScrollView style={styles.loansScroll} contentContainerStyle={styles.loansContainer}>
         {/* Empréstimos Ativos */}
         <View style={styles.loanSection}>
           <Text style={styles.sectionTitle}>Seus Empréstimos Ativos</Text>
-          {loansWithStatus.filter(loan => loan.status === 'ativo').map(loan => (
-            <LoanCard
-              key={loan.id}
-              status="ativo"
-              bookTitle={loan.bookTitle}
-              loanDate={loan.loanDate}
-              returnDate={loan.returnDate}
-            />
-          ))}
+          {emprestimos.filter(e => e.status === 'ativo').length === 0 ? (
+            <Text style={styles.emptyText}>📚 Você não possui empréstimos ativos no momento.</Text>
+          ) : (
+            emprestimos
+              .filter(e => e.status === 'ativo')
+              .map((e) => (
+                <LoanCard
+                  key={e.id}
+                  status="ativo"
+                  bookTitle={e.bookTitle}
+                  loanDate={e.loanDate}
+                  returnDate={e.returnDate}
+                />
+              ))
+          )}
         </View>
 
         {/* Empréstimos Atrasados */}
         <View style={styles.loanSection}>
           <Text style={styles.sectionTitle}>Empréstimos Atrasados</Text>
-          {loansWithStatus.filter(loan => loan.status === 'atrasado').map(loan => (
-            <LoanCard
-              key={loan.id}
-              status="atrasado"
-              bookTitle={loan.bookTitle}
-              loanDate={loan.loanDate}
-              returnDate={loan.returnDate}
-              fineAmount={loan.fineAmount}
-            />
-          ))}
+          {emprestimos.filter(e => e.status === 'atrasado').length === 0 ? (
+            <Text style={styles.emptyText}>✅ Nenhum empréstimo atrasado encontrado.</Text>
+          ) : (
+            emprestimos
+              .filter(e => e.status === 'atrasado')
+              .map((e) => (
+                <LoanCard
+                  key={e.id}
+                  status="atrasado"
+                  bookTitle={e.bookTitle}
+                  loanDate={e.loanDate}
+                  returnDate={e.returnDate}
+                  fineAmount={e.fineAmount}
+                />
+              ))
+          )}
         </View>
       </ScrollView>
     </View>
@@ -153,5 +184,11 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#E4E4E7',
     marginHorizontal: 16,
+  },
+  emptyText: {
+    fontSize: 14,
+    color: '#71717A',
+    fontStyle: 'italic',
+    marginBottom: 12,
   },
 });

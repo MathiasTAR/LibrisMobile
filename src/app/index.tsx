@@ -3,7 +3,9 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { Button } from "@components/button";
 import { Input } from "@components/input";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loginUsuario } from "../services/api"; // Importar a função de login
+
 
 export default function Index() {
   const [matricula, setMatricula] = useState("");
@@ -19,11 +21,14 @@ export default function Index() {
       const result = await loginUsuario(matricula, senha);
       
       if (result.sucesso) {
-        router.navigate("../menu");
-      }else{
+        // SALVA o usuário no AsyncStorage
+        await AsyncStorage.setItem("usuarioLogado", JSON.stringify(result.usuario));
+
+        router.navigate("../menu"); // ou a tela principal
+      } else {
         Alert.alert("Erro", result.mensagem || "Credenciais inválidas");
       }
-    }catch (error: any) {
+    } catch (error: any) {
       Alert.alert("Erro", error.message || "Falha na conexão");
     }
   }
