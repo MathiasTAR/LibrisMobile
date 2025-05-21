@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet, SafeAreaView } from 'react-native';
 import { listarLivros } from '../../services/api';
 import { BookCard } from '@components/cards/cardlivros';
 import {SearchBar} from '@components/barrapesquisa';
@@ -35,7 +35,7 @@ export default function biblioteca() {
   };
 
   return (
-    <View>
+    <SafeAreaView style={styles.safeArea}>
       <Card />
       <SearchBar value={query} onChangeText={setQuery} onSearch={handleSearch} />
       <ScrollView style={styles.scroll} contentContainerStyle={styles.containerScroll}>
@@ -43,11 +43,15 @@ export default function biblioteca() {
           <BookCard key={livro.id} title={livro.titulo} autor={livro.autor} status={livro.disponibilidade} id={livro.id_livro} />
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'transparent', // or your preferred background color
+  },
   scroll: { marginTop: 12 },
   containerScroll: { paddingBottom: 80 },
 });

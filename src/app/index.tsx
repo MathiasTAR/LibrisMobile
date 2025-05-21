@@ -1,4 +1,4 @@
-import { View, StyleSheet, Alert, Image, ImageBackground, StatusBar, Platform } from "react-native";
+import { View, StyleSheet, Alert, Image, ImageBackground, StatusBar, Platform, SafeAreaView } from "react-native";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Button } from "@components/button";
@@ -35,51 +35,53 @@ export default function Index() {
 
   const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight ?? 0 : 0;
 
-  return (
-    <>
-      <StatusBar
-        translucent
-        backgroundColor="transparent"
-        barStyle="light-content"
-      />
-      
-      <ImageBackground
-        source={require("@assets/images/background.jpg")}
-        style={[styles.background, { marginTop: -statusBarHeight }]}
-        resizeMode="cover"
-      >
-        <View style={[styles.container, { paddingTop: statusBarHeight }]}>
-          <View style={styles.card}>
-            <Image
-              source={require("@assets/images/libris2.png")}
-              style={styles.logo}
-              resizeMode="contain"
-            />
-            <Input
-              onChangeText={setMatricula}
-              value={matricula}
-              placeholder="Digite sua matrícula"
-              keyboardType="numeric" // Adicionado teclado numérico
-            />
-            <Input
-              onChangeText={setSenha}
-              value={senha}
-              placeholder="Digite sua senha"
-              secureTextEntry={true}
-            />
-            <Button 
-              title="Entrar" 
-              onPress={handleNext}
-            />
-          </View>
+return (
+  <SafeAreaView style={styles.safeArea}>
+    <StatusBar
+      translucent
+      backgroundColor="transparent"
+      barStyle="light-content"
+    />
+    
+    <ImageBackground
+      source={require("@assets/images/background.jpg")}
+      style={[styles.background, { marginTop: -statusBarHeight }]}
+      resizeMode="cover"
+    >
+      <View style={[styles.container, { paddingTop: statusBarHeight }]}>
+        <View style={styles.card}>
+          <Image
+            source={require("@assets/images/libris2.png")}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+          <Input
+            onChangeText={setMatricula}
+            value={matricula}
+            placeholder="Digite sua matrícula"
+            keyboardType="numeric"
+          />
+          <Input
+            onChangeText={setSenha}
+            value={senha}
+            placeholder="Digite sua senha"
+            secureTextEntry={true}
+          />
+          <Button 
+            title="Entrar" 
+            onPress={handleNext}
+          />
         </View>
-      </ImageBackground>
-    </>
-  );
+      </View>
+    </ImageBackground>
+  </SafeAreaView>
+);
 }
-
-
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'transparent', // or your preferred background color
+  },
   container: {
     backgroundColor: "rgba(0, 0, 0, 0.50)",
     flex: 1,

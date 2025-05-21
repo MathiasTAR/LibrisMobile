@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: "http://192.168.18.26:3000" // 🔁 Troque pelo seu IP local se mudar
+  baseURL: "http://192.168.1.8:3000" // 🔁 Troque pelo seu IP local se mudar
+  //baseURL: "http://192.168.18.26:3000" // 🔁 Troque pelo seu IP local se mudar
 });
 
 // 🔍 Buscar todos os livros
