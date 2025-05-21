@@ -59,7 +59,6 @@ export default function Index() {
               onChangeText={setMatricula}
               value={matricula}
               placeholder="Digite sua matrícula"
-              keyboardType="numeric" // Adicionado teclado numérico
             />
             <Input
               onChangeText={setSenha}
