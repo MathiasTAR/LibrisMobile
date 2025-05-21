@@ -71,7 +71,7 @@ export default function Usuario() {
 
       {/* Informações pessoais */}
       <View style={styles.personalInfoSection}>
-        <Text style={styles.sectionTitle}>Informações pessoais</Text>
+        <Text style={styles.firstTitle}>Informações pessoais</Text>
 
         <View style={styles.infoItem}>
           <Text style={styles.infoLabel}>nome</Text>
@@ -166,6 +166,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 16,
     color: '#3F3F46',
+    marginTop: 13
+  },
+  firstTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    color: '#3F3F46',
   },
   infoItem: {
     marginBottom: 12,
@@ -189,6 +196,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#71717A',
     fontStyle: 'italic',
-    marginBottom: 12,
   },
 });

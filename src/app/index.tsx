@@ -35,47 +35,46 @@ export default function Index() {
 
   const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight ?? 0 : 0;
 
-return (
-  <SafeAreaView style={styles.safeArea}>
-    <StatusBar
-      translucent
-      backgroundColor="transparent"
-      barStyle="light-content"
-    />
-    
-    <ImageBackground
-      source={require("@assets/images/background.jpg")}
-      style={[styles.background, { marginTop: -statusBarHeight }]}
-      resizeMode="cover"
-    >
-      <View style={[styles.container, { paddingTop: statusBarHeight }]}>
-        <View style={styles.card}>
-          <Image
-            source={require("@assets/images/libris2.png")}
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <Input
-            onChangeText={setMatricula}
-            value={matricula}
-            placeholder="Digite sua matrícula"
-            keyboardType="numeric"
-          />
-          <Input
-            onChangeText={setSenha}
-            value={senha}
-            placeholder="Digite sua senha"
-            secureTextEntry={true}
-          />
-          <Button 
-            title="Entrar" 
-            onPress={handleNext}
-          />
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="light-content"
+      />
+      
+      <ImageBackground
+        source={require("@assets/images/background.jpg")}
+        style={[styles.background, { marginTop: -statusBarHeight }]}
+        resizeMode="cover"
+      >
+        <View style={[styles.container, { paddingTop: statusBarHeight }]}>
+          <View style={styles.card}>
+            <Image
+              source={require("@assets/images/libris2.png")}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+            <Input
+              onChangeText={setMatricula}
+              value={matricula}
+              placeholder="Digite sua matrícula"
+            />
+            <Input
+              onChangeText={setSenha}
+              value={senha}
+              placeholder="Digite sua senha"
+              secureTextEntry={true}
+            />
+            <Button 
+              title="Entrar" 
+              onPress={handleNext}
+            />
+          </View>
         </View>
-      </View>
-    </ImageBackground>
-  </SafeAreaView>
-);
+      </ImageBackground>
+    </SafeAreaView>
+  );
 }
   const styles = StyleSheet.create({
   safeArea: {

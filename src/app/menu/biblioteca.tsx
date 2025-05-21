@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, StyleSheet, SafeAreaView } from 'react-native';
+import { View, StyleSheet, FlatList, ActivityIndicator, Text, SafeAreaView } from 'react-native';
 import { listarLivros } from '../../services/api';
 import { BookCard } from '@components/cards/cardlivros';
-import {SearchBar} from '@components/barrapesquisa';
-import {Card} from '@components/cards/topcard';
+import { SearchBar } from '@components/barrapesquisa';
+import { Card } from '@components/cards/topcard';
 
 interface Livro {
   id: string;
@@ -13,45 +13,76 @@ interface Livro {
   disponibilidade: 'Disponível' | 'Indisponível';
 }
 
-export default function biblioteca() {
+export default function Biblioteca() {
   const [livros, setLivros] = useState<Livro[]>([]);
   const [query, setQuery] = useState('');
-  const [todosLivros, setTodosLivros] = useState<Livro[]>([]);
+  const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
     const carregarLivros = async () => {
-      const data = await listarLivros();
-      setLivros(data);
-      setTodosLivros(data);
+      try {
+        const data = await listarLivros();
+        setLivros(data);
+      } catch (error) {
+        console.error('Erro ao carregar livros:', error);
+      } finally {
+        setCarregando(false);
+      }
     };
+
     carregarLivros();
   }, []);
 
-  const handleSearch = () => {
-    const filtrados = todosLivros.filter((livro) =>
-      livro.titulo.toLowerCase().includes(query.toLowerCase())
-    );
-    setLivros(filtrados);
-  };
+  // Filtro em tempo real
+  const livrosFiltrados = livros.filter((livro) =>
+    livro.titulo.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.container}>
       <Card />
-      <SearchBar value={query} onChangeText={setQuery} onSearch={handleSearch} />
-      <ScrollView style={styles.scroll} contentContainerStyle={styles.containerScroll}>
-        {livros.map((livro) => (
-          <BookCard key={livro.id} title={livro.titulo} autor={livro.autor} status={livro.disponibilidade} id={livro.id_livro} />
-        ))}
-      </ScrollView>
+      <SearchBar
+        value={query}
+        onChangeText={setQuery}
+        onSearch={() => {}}
+      />
+
+      {carregando ? (
+        <ActivityIndicator size="large" color="#c47f17" style={{ marginTop: 20 }} />
+      ) : livrosFiltrados.length === 0 ? (
+        <Text style={styles.emptyText}>Nenhum livro encontrado.</Text>
+      ) : (
+        <FlatList
+          data={livrosFiltrados}
+          keyExtractor={(item) => item.id_livro}
+          renderItem={({ item }) => (
+            <BookCard
+              title={item.titulo}
+              autor={item.autor}
+              status={item.disponibilidade}
+              id={item.id_livro}
+            />
+          )}
+          contentContainerStyle={styles.listContainer}
+        />
+      )}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
+  container: {
     flex: 1,
-    backgroundColor: 'transparent', // or your preferred background color
+    backgroundColor: '#FAFAFA'
   },
-  scroll: { marginTop: 12 },
-  containerScroll: { paddingBottom: 80 },
+  listContainer: {
+    paddingHorizontal: 2,
+    paddingBottom: 20,
+  },
+  emptyText: {
+    textAlign: 'center',
+    marginTop: 20,
+    color: '#71717A',
+    fontStyle: 'italic',
+  },
 });
