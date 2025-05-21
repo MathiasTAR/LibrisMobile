@@ -3,7 +3,7 @@
 Aplicativo mobile para gerenciamento de empréstimos de livros em bibliotecas acadêmicas. Desenvolvido com React Native e Expo.
 
 <div align="center">
-  <img src="/assets/images/libris2.png" width="200" alt="Logo Libris">
+  <img src="/assets/images/libris3.png" width="200" alt="Logo Libris">
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/MathiasTAR/LibrisMobile)
 ![GitHub repo size](https://img.shields.io/github/repo-size/MathiasTAR/LibrisMobile)
